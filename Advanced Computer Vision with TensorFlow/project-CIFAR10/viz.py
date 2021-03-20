@@ -10,6 +10,7 @@ import tensorflow_datasets as tfds
 
 
 
+classes = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
 
 
@@ -22,7 +23,7 @@ plt.rc('text', color='a8151a')
 plt.rc('figure', facecolor='F0F0F0')# Matplotlib fonts
 MATPLOTLIB_FONT_DIR = os.path.join(os.path.dirname(plt.__file__), "mpl-data/fonts/ttf")
 # utility to display a row of digits with their predictions
-def display_images(digits, predictions, labels, title):
+def display_images(digits, predictions, labels, title, filename = "image"):
 
   n = 10
 
@@ -45,7 +46,8 @@ def display_images(digits, predictions, labels, title):
     plt.xticks([])
     plt.yticks([])
     plt.imshow(n_digits[i])
-  plt.savefig('ex')  
+  plt.savefig(filename)
+  plt.close()  
 
 
 # utility to display training and validation curves
@@ -54,4 +56,6 @@ def plot_metrics(metric_name, title, ylim=5):
   plt.ylim(0,ylim)
   plt.plot(history.history[metric_name],color='blue',label=metric_name)
   plt.plot(history.history['val_' + metric_name],color='green',label='val_' + metric_name)
+  plt.savefig("loss")
+  plt.close()
 

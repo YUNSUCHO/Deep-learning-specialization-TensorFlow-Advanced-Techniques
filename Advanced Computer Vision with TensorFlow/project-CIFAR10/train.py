@@ -29,9 +29,9 @@ classes = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'hors
 (training_images, training_labels) , (validation_images, validation_labels) = tf.keras.datasets.cifar10.load_data()
 
 
-display_images(training_images, training_labels, training_labels, "Training Data" )
+display_images(training_images, training_labels, training_labels, "Training Data" ,filename = 'train')
 
-display_images(validation_images, validation_labels, validation_labels, "Training Data" )
+display_images(validation_images, validation_labels, validation_labels, "Training Data", filename = 'val')
 
 
 def preprocess_image_input(input_images):
@@ -105,7 +105,7 @@ model.summary()
 
 
 # this will take around 20 minutes to complete
-EPOCHS = 4
+EPOCHS = 1
 history = model.fit(train_X, training_labels, epochs=EPOCHS, validation_data = (valid_X, validation_labels), batch_size=64)
 print('saving model')
 model.save('model')
@@ -124,7 +124,10 @@ plot_metrics("accuracy", "Accuracy")
 probabilities = model.predict(valid_X, batch_size=64)
 probabilities = np.argmax(probabilities, axis = 1)
 
-display_images(validation_images, probabilities, validation_labels, "Bad predictions indicated in red.")
+display_images(validation_images, probabilities, 
+                validation_labels,
+                 "Bad predictions indicated in red.",
+                 filename = 'prediction')
 
 
 
